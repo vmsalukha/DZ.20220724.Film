@@ -1,0 +1,70 @@
+﻿@model List<Movie>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-controller="Home" asp-action="SearchMovie">
+    <label>
+        Фільтр
+        <input id="ft" type="radio" value="Title" name="filter"><label for="ft">Title</label>
+        <input id="fp" type="radio" value="Produser" name="filter"><label for="fp">Produser</label>
+        <input id="fst" type="radio" value="Style" name="filter"><label for="fst">Style</label>
+        <input id="fsh" type="radio" value="ShortDescription" name="filter"><label for="fsh">ShortDescription</label>
+        <input id="fse" type="radio" value="SessionList" name="filter"><label for="fse">SessionList</label>
+    </label><br>
+        <p>
+            Title: <input type="text" name="searchMovie" />
+            <input type="submit" value="Filter" />
+        </p>
+@*        <p>
+            Title: <input type="text" name="searchMovie" />
+            <input type="time" class="form-control" value="Filter" />
+        </p>
+
+*@
+</form>
+
+@*<form>
+    <p>
+        Movie Title: <input type="text" name="SearchMovie">
+        <input type="submit" value="Filter"/>
+    </p>
+</form>*@
+
+
+
+<a  class="btn btn-primary" asp-action="Create">Create Movie</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Produser</th>
+            <th>ShortDescription</th>
+            <th>SessionList</th>
+            <th>Menu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<th>@Html.DisplayNameFor(model=>model.Title)</th>*@
+                <td>@item.Title</td>
+                <td>@item.Produser</td>
+                <td>@item.ShortDescription</td>
+                <td>
+                        @foreach (var session in @item.SessionList)
+                        {
+                            <p>@session</p>
+                        }
+                </td>
+                <td width="140px">
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a><br>
+                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a><br>
+                    <a class="btn btn-outline-warning" asp-action="EditSessionList" asp-route-id="@item.Id">Edit Session</a><br>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a><br>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DZ._20220724.Film.Models.Movie>
+
+@{
+    ViewData["Title"] = "SearchMovie";
+}
+
+<h1>SearchMovie</h1>
+
+<p>
+    <a asp-action="Index">Home</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Style)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionList)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Style)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortDescription)
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach (string session in (item.SessionList))
+                            {
+                                <li>@session</li>
+                            }
+                        </ul>
+                    </td>
+                    <td width="140px">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a><br>
+                        <a class="btn btn-warning" asp-action="EditSessionList" asp-route-id="@item.Id">Edit Session</a><br>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a><br>
+                    </td>
+
+
+                </tr>
+            }
+        else
+        {
+            <a class="btn btn-warning" asp-action="Index">Nothing found!</a>
+        }
+
+    </tbody>
+</table>

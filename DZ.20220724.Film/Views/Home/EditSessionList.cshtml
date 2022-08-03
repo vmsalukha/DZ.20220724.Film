@@ -1,0 +1,66 @@
+﻿@model DZ._20220724.Film.Models.Movie
+
+@{
+    //ViewData["Title"] = "EditSessionList";
+    ViewData["Title"] = "AddSessionList";
+}
+
+<h1>EditSessionList</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Produser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Produser)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Style)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Style)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SessionList)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (string delSession in Model.SessionList)
+                {
+                        <li>@delSession</li>
+                }
+            </ul>
+            <a asp-action="AddSession" class="btn btn-primary" asp-route-id="@Model.Id">Add Session</a>
+            <a asp-action="DelSession" class="btn btn-danger" asp-route-id="@Model.Id">Delele Session</a>
+            <a class="btn btn-success" asp-action="Index">Back to List</a>
+            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a><br>
+        </dd>
+    </dl>
+</div>
+
+@*<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>*@
+

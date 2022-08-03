@@ -1,0 +1,79 @@
+﻿@model DZ._20220724.Film.Models.Movie
+
+@{
+    ViewData["Title"] = "DelSession";
+}
+
+<h1>DelSession</h1>
+
+<table class="table">
+    <form asp-action="DelSession" method="post">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Produser</th>
+            <th>Short Description</th>
+            <th width="200px">Session List</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+                @*<th>@Html.DisplayNameFor(model=>model.Title)</th>*@
+            <td>
+                    @Html.DisplayFor(model => model.Title)
+            </td>
+            <td>
+                    @Html.DisplayFor(model => model.Produser)
+            </td>
+
+            <td>
+                    @Html.DisplayFor(model => model.ShortDescription)
+            </td>
+            <td>
+                <ul>
+                    @foreach (string delSession in Model.SessionList)
+                    {
+                        <form method="post">
+                            <li class="li-button-dell">@delSession
+                            <button type="submit" class="btn btn-danger" asp-page-handler="DelSession" asp-route-id="@Model.Id">
+                                Delete
+                            </button>
+                            </li>
+                            <input hidden="hidden" value="@delSession" name="delSession" class="form-control" />
+                           @* <button type="submit" class="btn btn-danger" asp-page-handler="DelSession" asp-route-id="@Model.Id">
+                                Delete
+                            </button>*@
+                        </form>
+                    }
+                </ul>
+            </td>
+        </tr>
+
+    </tbody>
+    </form>
+</table>
+
+
+
+
+<div class="row">
+
+    <div class="form-group">
+        @*            <p>
+        Session: <input type="time" class="form-control" value="Filter" name="delSession"/>
+        </p>*@
+        @*<input type="submit" value="Save" class="btn btn-primary" />*@
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

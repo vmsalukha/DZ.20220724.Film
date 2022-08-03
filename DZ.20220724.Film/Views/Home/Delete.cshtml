@@ -1,0 +1,130 @@
+﻿@model DZ._20220724.Film.Models.Movie
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Produser)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Produser)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Style)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Style)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SessionList)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SessionList)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" method="post">
+   @*     <input type="submit" value="Delete" class="btn btn-danger" /> |*@
+
+
+                <!-- Button to Open the Modal -->
+        <button id="btnOpenModal" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+            Delete
+        </button>
+        
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Confirmation</h4>
+        @*                <button type="button" class="close" data-dismiss="modal"></button>
+        *@            </div>
+        
+                    <!-- Modal body -->
+                    <div class="modal-body" id="modalcontent">
+                    Are you sure you want to delete movie "@Model.Title"?
+                    </div>
+        
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                        @*<button type="button" class="btn btn-danger">Yes, delete it</button>*@
+                             <input type="submit" value="Delete" class="btn btn-danger" />
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>*@
+                    </div> 
+                </div>
+            </div>
+        </div>
+        
+        @section Scripts{ 
+            <script>
+                $(function () {
+                    $("#btnOpenModal").click(function () {
+                        // call the action method, in the success function add the return data in the Modal content.
+                        $.ajax({
+                            type: "Get",
+                            url: "/Home/GetViewContent",  //remember change the controller to your owns.  
+                            success: function (data) {
+                                console.log(data)
+                                $('#modalcontent').html(data);
+                            }, 
+                            error: function (response) {
+                                console.log(response.responseText);
+                            }
+                        });
+                    });
+                    ////Popup Modal's Cancel button click
+                    //$("#myModal").on("click", ".btn-default", function () {
+                    //    //since the button element using the data-dismiss attribute, there is no need to close the Modal via jquery.
+                    //    // code. using jquery ajax do something
+                    //    alert("Cancel button click");
+                    //});
+                    ////Popup Modal's  delete button click
+                    //$("#myModal").on("click", ".btn-danger", function () {
+                    //    // code
+                    //    alert("Delete button click");
+        
+                    //    //using the following code to close the popup modal.                
+                    //    $('#myModal').modal('hide') //or  $("#myModal").modal('toggle');
+        
+                    //    //using JQuery Ajax to call the action method.
+                    //});
+                });
+            </script>
+        }
+
+
+
+
+        <a class="btn btn-success" asp-action="Index">Back to List</a>
+    </form>
+</div>

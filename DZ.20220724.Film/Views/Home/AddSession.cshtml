@@ -1,0 +1,70 @@
+﻿@model DZ._20220724.Film.Models.Movie
+
+@{
+    ViewData["Title"] = "AddSession";
+}
+
+<h1>AddSession</h1>
+
+<h4>Movie</h4>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Produser</th>
+            <th>Short Description</th>
+            <th>Session List</th>
+        </tr>
+    </thead>
+    <tbody>
+
+            <tr>
+                @*<th>@Html.DisplayNameFor(model=>model.Title)</th>*@
+                <td>
+                    @Html.DisplayFor(model => model.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Produser)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(model => model.ShortDescription)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (string session in Model.SessionList)
+                         {
+                            <li>@session</li>
+                         }
+                    </ul>
+                </td>
+            </tr>
+
+    </tbody>
+</table>
+
+
+
+
+<div class="row">
+    <form asp-action="AddSession">
+        <div class="form-group">
+            <p>
+                Session: <input type="time" class="form-control" value="Filter" name="addSession"/>
+            </p>
+            <input type="submit" value="Add Session" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a class="btn btn-success" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
